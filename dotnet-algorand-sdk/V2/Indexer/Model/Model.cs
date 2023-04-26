@@ -15,11 +15,14 @@
 namespace Algorand.V2.Indexer.Model
 {
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.IO;
+    using System.Numerics;
+    using System.Runtime.Serialization;
     using System = global::System;
 
 
@@ -38,11 +41,11 @@ namespace Algorand.V2.Indexer.Model
 
         /// <summary>\[algo\] total number of MicroAlgos in the account</summary>
         [Newtonsoft.Json.JsonProperty("amount")] //, Required = Newtonsoft.Json.Required.Always)]
-        public ulong Amount { get; set; }
+        public BigInteger Amount { get; set; }
 
         /// <summary>specifies the amount of MicroAlgos in the account, without the pending rewards.</summary>
         [Newtonsoft.Json.JsonProperty("amount-without-pending-rewards")]//)] //)] //, Required = Newtonsoft.Json.Required.Always)]
-        public ulong AmountWithoutPendingRewards { get; set; }
+        public BigInteger AmountWithoutPendingRewards { get; set; }
 
         /// <summary>\[appl\] applications local data stored in this account.
         /// <br/>
@@ -369,7 +372,7 @@ namespace Algorand.V2.Indexer.Model
     {
         /// <summary>\[a\] number of units held.</summary>
         [Newtonsoft.Json.JsonProperty("amount")] //, Required = Newtonsoft.Json.Required.Always)]
-        public ulong Amount { get; set; }
+        public BigInteger Amount { get; set; }
 
         /// <summary>Asset ID of the holding.</summary>
         [Newtonsoft.Json.JsonProperty("asset-id")] //, Required = Newtonsoft.Json.Required.Always)]
@@ -452,7 +455,7 @@ namespace Algorand.V2.Indexer.Model
 
         /// <summary>\[t\] The total number of units of this asset.</summary>
         [Newtonsoft.Json.JsonProperty("total")] //, Required = Newtonsoft.Json.Required.Always)]
-        public ulong Total { get; set; }
+        public BigInteger Total { get; set; }
 
         /// <summary>\[un\] Name of a unit of this asset, as supplied by the creator. Included only when the name of a unit of this asset is composed of printable utf-8 characters.</summary>
         [Newtonsoft.Json.JsonProperty("unit-name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -469,8 +472,6 @@ namespace Algorand.V2.Indexer.Model
         /// <summary>Base64 encoded URL where more information about the asset can be retrieved.</summary>
         [Newtonsoft.Json.JsonProperty("url-b64", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public byte[] UrlB64 { get; set; }
-
-
     }
 
     /// <summary>Block information.
@@ -663,7 +664,7 @@ namespace Algorand.V2.Indexer.Model
         public string Address { get; set; }
 
         [Newtonsoft.Json.JsonProperty("amount")] //, Required = Newtonsoft.Json.Required.Always)]
-        public ulong Amount { get; set; }
+        public BigInteger Amount { get; set; }
 
         [Newtonsoft.Json.JsonProperty("is-frozen")] //, Required = Newtonsoft.Json.Required.Always)]
         public bool IsFrozen { get; set; }
@@ -898,11 +899,11 @@ namespace Algorand.V2.Indexer.Model
 
         /// <summary>\[rc\] rewards applied to close-remainder-to account.</summary>
         [Newtonsoft.Json.JsonProperty("close-rewards", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? CloseRewards { get; set; }
+        public BigInteger? CloseRewards { get; set; }
 
         /// <summary>\[ca\] closing amount for transaction.</summary>
         [Newtonsoft.Json.JsonProperty("closing-amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? ClosingAmount { get; set; }
+        public BigInteger? ClosingAmount { get; set; }
 
         /// <summary>Round when the transaction was confirmed.</summary>
         [Newtonsoft.Json.JsonProperty("confirmed-round", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1127,15 +1128,15 @@ namespace Algorand.V2.Indexer.Model
     {
         /// <summary>\[aamt\] Amount of asset to transfer. A zero amount transferred to self allocates that asset in the account's Assets map.</summary>
         [Newtonsoft.Json.JsonProperty("amount")] //, Required = Newtonsoft.Json.Required.Always)]
-        public ulong Amount { get; set; }
+        public BigInteger Amount { get; set; }
 
         /// <summary>\[xaid\] ID of the asset being transferred.</summary>
         [Newtonsoft.Json.JsonProperty("asset-id")] //, Required = Newtonsoft.Json.Required.Always)]
-        public ulong AssetId { get; set; }
+        public BigInteger AssetId { get; set; }
 
         /// <summary>Number of assets transfered to the close-to account as part of the transaction.</summary>
         [Newtonsoft.Json.JsonProperty("close-amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ulong? CloseAmount { get; set; }
+        public BigInteger? CloseAmount { get; set; }
 
         /// <summary>\[aclose\] Indicates that the asset should be removed from the account's Assets map, and specifies where the remaining asset holdings should be transferred.  It's always valid to transfer remaining asset holdings to the creator account.</summary>
         [Newtonsoft.Json.JsonProperty("close-to", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1196,11 +1197,11 @@ namespace Algorand.V2.Indexer.Model
     {
         /// <summary>\[amt\] number of MicroAlgos intended to be transferred.</summary>
         [Newtonsoft.Json.JsonProperty("amount")] //, Required = Newtonsoft.Json.Required.Always)]
-        public ulong Amount { get; set; }
+        public BigInteger Amount { get; set; }
 
         /// <summary>Number of MicroAlgos that were sent to the close-remainder-to address when closing the sender account.</summary>
         [Newtonsoft.Json.JsonProperty("close-amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? CloseAmount { get; set; }
+        public BigInteger? CloseAmount { get; set; }
 
         /// <summary>\[close\] when set, indicates that the sending account should be closed and all remaining funds be transferred to this address.</summary>
         [Newtonsoft.Json.JsonProperty("close-remainder-to", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

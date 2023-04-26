@@ -994,7 +994,9 @@ namespace Algorand.V2.Indexer.Model
         /// <br/>* \[acfg\] asset-config-transaction
         /// <br/>* \[axfer\] asset-transfer-transaction
         /// <br/>* \[afrz\] asset-freeze-transaction
-        /// <br/>* \[appl\] application-transaction</summary>
+        /// <br/>* \[appl\] application-transaction
+        /// <br/>* \[stpf\] state-proof-transaction
+        /// </summary>
         [Newtonsoft.Json.JsonProperty("tx-type")] //, Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -1311,7 +1313,9 @@ namespace Algorand.V2.Indexer.Model
 
         [System.Runtime.Serialization.EnumMember(Value = @"appl")]
         Appl = 5,
-
+        
+        [System.Runtime.Serialization.EnumMember(Value = @"stpf")]
+        Stpf = 6
     }
 
     /// <summary>SigType filters just results using the specified type of signature:
@@ -1619,6 +1623,8 @@ namespace Algorand.V2.Indexer.Model
         [System.Runtime.Serialization.EnumMember(Value = @"appl")]
         Appl = 5,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"stpf")]
+        Stpf = 6
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.14.5.0 (NJsonSchema v10.5.2.0 (Newtonsoft.Json v12.0.0.0))")]

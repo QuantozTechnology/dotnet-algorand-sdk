@@ -34,9 +34,9 @@ namespace Algorand
         /// <returns>the rebuilded account</returns>
         public static Account AccountFromPrivateKey(byte[] privateKey)
         {
-            if(privateKey.Length != SK_SIZE)            
+            if(privateKey.Length != SK_SIZE)
                 throw new ArgumentException("Incorrect private key length");
-            
+
             var privateKeyRebuild = new Ed25519PrivateKeyParameters(privateKey, 0);
             var publicKeyRebuild = privateKeyRebuild.GeneratePublicKey();
             var act = new Account

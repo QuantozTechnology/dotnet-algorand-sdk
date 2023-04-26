@@ -799,7 +799,7 @@ namespace Algorand
                     genesisHash)
             {
                 assetReceiver = assetReceiver, //arcv
-                assetSender = assetRevokedFrom, //asnd        
+                assetSender = assetRevokedFrom, //asnd
                 assetAmount = assetAmount, // aamt
                 sender = transactionSender // snd
             }; // gh
@@ -919,10 +919,11 @@ namespace Algorand
             public static readonly Type AssetTransfer = new Type(4);
             public static readonly Type AssetFreeze = new Type(5);
             public static readonly Type ApplicationCall = new Type(6);
+            public static readonly Type StateProof = new Type(7);
 
             private static Dictionary<string, int> namesMap = new Dictionary<string, int> {
                 {"", 0 }, {"pay", 1}, {"keyreg", 2},
-                { "acfg", 3}, {"axfer", 4}, { "afrz", 5}, { "appl", 6}
+                { "acfg", 3}, {"axfer", 4}, { "afrz", 5}, { "appl", 6}, { "sptf", 7}
             };
             /// <summary>
             /// Return the enumeration for the given string value. Required for JSON serialization.

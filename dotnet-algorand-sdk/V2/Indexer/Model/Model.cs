@@ -1004,12 +1004,12 @@ namespace Algorand.V2.Indexer.Model
         public TransactionTxType TxType { get; set; }
 
         /// <summary>\[ld\] Local state key/value changes for the application being executed by this transaction.</summary>
-        [Newtonsoft.Json.JsonProperty("local-state-delta", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<AccountStateDelta> LocalStateDelta { get; set; }
+        //[Newtonsoft.Json.JsonProperty("local-state-delta", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public System.Collections.Generic.ICollection<AccountStateDelta> LocalStateDelta { get; set; }
 
         /// <summary>\[gd\] Global state key/value changes for the application being executed by this transaction.</summary>
-        [Newtonsoft.Json.JsonProperty("global-state-delta", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public StateDelta GlobalStateDelta { get; set; }
+        //[Newtonsoft.Json.JsonProperty("global-state-delta", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        //public StateDelta GlobalStateDelta { get; set; }
 
         /// <summary>\[lg\] Logs for the application being executed by this transaction.</summary>
         [Newtonsoft.Json.JsonProperty("logs", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

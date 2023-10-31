@@ -172,11 +172,6 @@ namespace Algorand.V2.Algod.Model
         [Newtonsoft.Json.JsonProperty("asset-id", Required = Newtonsoft.Json.Required.Always)]
         public ulong AssetId { get; set; }
 
-        /// <summary>Address that created this asset. This is the address where the parameters for this asset can be found, and also the address where unwanted asset units can be sent in the worst case.</summary>
-        [Newtonsoft.Json.JsonProperty("creator", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Creator { get; set; }
-
         /// <summary>\[f\] whether or not the holding is frozen.</summary>
         [Newtonsoft.Json.JsonProperty("is-frozen", Required = Newtonsoft.Json.Required.Always)]
         public bool IsFrozen { get; set; }

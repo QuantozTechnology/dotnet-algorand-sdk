@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Linq;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Threading;
 using Algorand.V2.Algod.Model;
 
@@ -313,7 +314,7 @@ namespace Algorand
         /// <param name="freeze">account which can freeze or unfreeze holder accounts</param>
         /// <param name="clawback">account which can issue clawbacks against holder accounts</param>
         private Transaction(Address sender, ulong? fee, ulong? firstValid, ulong? lastValid, byte[] note,
-                           string genesisID, Digest genesisHash, ulong? assetTotal, int assetDecimals, bool defaultFrozen,
+                           string genesisID, Digest genesisHash, BigInteger? assetTotal, int assetDecimals, bool defaultFrozen,
                            string assetUnitName, string assetName, string url, byte[] metadataHash,
                            Address manager, Address reserve, Address freeze, Address clawback)
         {
@@ -580,7 +581,7 @@ namespace Algorand
         /// <param name="clawback">account which can issue clawbacks against holder accounts</param>
         /// <returns></returns>
         public static Transaction CreateAssetCreateTransaction(Address sender, ulong? fee, ulong? firstValid, ulong? lastValid, byte[] note,
-                           string genesisID, Digest genesisHash, ulong? assetTotal, int assetDecimals, bool defaultFrozen,
+                           string genesisID, Digest genesisHash, BigInteger? assetTotal, int assetDecimals, bool defaultFrozen,
                            string assetUnitName, string assetName, string url, byte[] metadataHash,
                            Address manager, Address reserve, Address freeze, Address clawback)
         {
@@ -1061,7 +1062,7 @@ namespace Algorand
             /// </summary>
             [JsonProperty(PropertyName = "t")]
             [DefaultValue(0)]
-            public ulong? assetTotal = 0;
+            public BigInteger? assetTotal = 0;
 
             /// <summary>
             /// Decimals specifies the number of digits to display after the decimal
@@ -1133,7 +1134,7 @@ namespace Algorand
             public Address assetClawback = new Address();
 
             public AssetParams(
-                   ulong? assetTotal,
+                   BigInteger? assetTotal,
                    int assetDecimals,
                    bool defaultFrozen,
                    string assetUnitName,

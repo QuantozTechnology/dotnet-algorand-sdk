@@ -149,7 +149,7 @@ namespace Algorand.V2.Algod.Model
     {
         /// <summary>unique asset identifier</summary>
         [Newtonsoft.Json.JsonProperty("index", Required = Newtonsoft.Json.Required.Always)]
-        public int Index { get; set; }
+        public BigInteger Index { get; set; }
 
         [Newtonsoft.Json.JsonProperty("params", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -167,11 +167,11 @@ namespace Algorand.V2.Algod.Model
     {
         /// <summary>\[a\] number of units held.</summary>
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Always)]
-        public ulong Amount { get; set; }
+        public BigInteger Amount { get; set; }
 
         /// <summary>Asset ID of the holding.</summary>
         [Newtonsoft.Json.JsonProperty("asset-id", Required = Newtonsoft.Json.Required.Always)]
-        public ulong AssetId { get; set; }
+        public BigInteger AssetId { get; set; }
 
         /// <summary>\[f\] whether or not the holding is frozen.</summary>
         [Newtonsoft.Json.JsonProperty("is-frozen", Required = Newtonsoft.Json.Required.Always)]

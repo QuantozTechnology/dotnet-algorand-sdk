@@ -419,9 +419,6 @@ namespace Algorand.V2.Indexer
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public async System.Threading.Tasks.Task<Response4> TransactionsGetAsync(int? limit, string next, string note_prefix, TxType? tx_type, SigType? sig_type, string txid, ulong? round, ulong? min_round, ulong? max_round, int? asset_id, System.DateTimeOffset? before_time, System.DateTimeOffset? after_time, ulong? currency_greater_than, ulong? currency_less_than, string account_id, bool? rekey_to, System.Threading.CancellationToken cancellationToken)
         {
-            if (account_id == null)
-                throw new System.ArgumentNullException("account_id");
-
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v2/accounts/{account-id}/transactions?");
             urlBuilder_.Replace("{account-id}", System.Uri.EscapeDataString(ConvertToString(account_id, System.Globalization.CultureInfo.InvariantCulture)));

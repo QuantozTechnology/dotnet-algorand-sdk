@@ -1,4 +1,4 @@
-/* 
+/*
  * Algod REST API.
  *
  * API Endpoint for AlgoD Operations.
@@ -87,7 +87,7 @@ namespace Algorand.Algod.Model
             }
             this.MinFee = minFee;
         }
-        
+
         /// <summary>
         /// ConsensusVersion indicates the consensus protocol version as of LastRound.
         /// </summary>
@@ -147,7 +147,7 @@ namespace Algorand.Algod.Model
             sb.Append("}\n");
             return sb.ToString();
         }
-  
+
         /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
@@ -177,32 +177,32 @@ namespace Algorand.Algod.Model
             if (input == null)
                 return false;
 
-            return 
+            return
                 (
                     this.ConsensusVersion == input.ConsensusVersion ||
                     (this.ConsensusVersion != null &&
                     this.ConsensusVersion.Equals(input.ConsensusVersion))
-                ) && 
+                ) &&
                 (
                     this.Fee == input.Fee ||
                     (this.Fee != null &&
                     this.Fee.Equals(input.Fee))
-                ) && 
+                ) &&
                 (
                     this.GenesisID == input.GenesisID ||
                     (this.GenesisID != null &&
                     this.GenesisID.Equals(input.GenesisID))
-                ) && 
+                ) &&
                 (
                     this.Genesishashb64 == input.Genesishashb64 ||
                     (this.Genesishashb64 != null &&
                     this.Genesishashb64.Equals(input.Genesishashb64))
-                ) && 
+                ) &&
                 (
                     this.LastRound == input.LastRound ||
                     (this.LastRound != null &&
                     this.LastRound.Equals(input.LastRound))
-                ) && 
+                ) &&
                 (
                     this.MinFee == input.MinFee ||
                     (this.MinFee != null &&

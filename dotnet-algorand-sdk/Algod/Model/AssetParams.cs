@@ -1,4 +1,4 @@
-/* 
+/*
  * Algod REST API.
  *
  * API Endpoint for AlgoD Operations.
@@ -73,7 +73,7 @@ namespace Algorand.Algod.Model
             this.Unitname = unitname;
             this.Url = url;
         }
-        
+
         /// <summary>
         /// AssetName specifies the name of this asset, as supplied by the creator.
         /// </summary>
@@ -173,7 +173,7 @@ namespace Algorand.Algod.Model
             sb.Append("}\n");
             return sb.ToString();
         }
-  
+
         /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
@@ -203,57 +203,57 @@ namespace Algorand.Algod.Model
             if (input == null)
                 return false;
 
-            return 
+            return
                 (
                     this.Assetname == input.Assetname ||
                     (this.Assetname != null &&
                     this.Assetname.Equals(input.Assetname))
-                ) && 
+                ) &&
                 (
                     this.Clawbackaddr == input.Clawbackaddr ||
                     (this.Clawbackaddr != null &&
                     this.Clawbackaddr.Equals(input.Clawbackaddr))
-                ) && 
+                ) &&
                 (
                     this.Creator == input.Creator ||
                     (this.Creator != null &&
                     this.Creator.Equals(input.Creator))
-                ) && 
+                ) &&
                 (
                     this.Defaultfrozen == input.Defaultfrozen ||
                     (this.Defaultfrozen != null &&
                     this.Defaultfrozen.Equals(input.Defaultfrozen))
-                ) && 
+                ) &&
                 (
                     this.Freezeaddr == input.Freezeaddr ||
                     (this.Freezeaddr != null &&
                     this.Freezeaddr.Equals(input.Freezeaddr))
-                ) && 
+                ) &&
                 (
                     this.Managerkey == input.Managerkey ||
                     (this.Managerkey != null &&
                     this.Managerkey.Equals(input.Managerkey))
-                ) && 
+                ) &&
                 (
                     this.Metadatahash == input.Metadatahash ||
                     (this.Metadatahash != null &&
                     this.Metadatahash.Equals(input.Metadatahash))
-                ) && 
+                ) &&
                 (
                     this.Reserveaddr == input.Reserveaddr ||
                     (this.Reserveaddr != null &&
                     this.Reserveaddr.Equals(input.Reserveaddr))
-                ) && 
+                ) &&
                 (
                     this.Total == input.Total ||
                     (this.Total != null &&
                     this.Total.Equals(input.Total))
-                ) && 
+                ) &&
                 (
                     this.Unitname == input.Unitname ||
                     (this.Unitname != null &&
                     this.Unitname.Equals(input.Unitname))
-                ) && 
+                ) &&
                 (
                     this.Url == input.Url ||
                     (this.Url != null &&

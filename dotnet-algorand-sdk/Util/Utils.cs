@@ -31,10 +31,10 @@ namespace Algorand
                 {
                     return "Transaction " + b3.Tx + " confirmed in round " + b3.Round;
                 }
-                // loops 4 times per second, > 5 times per second will fail using TestNet Purestake Free verison  
-                // also blocks are created in under 5 seconds so no real need to poll constantly - 
+                // loops 4 times per second, > 5 times per second will fail using TestNet Purestake Free verison
+                // also blocks are created in under 5 seconds so no real need to poll constantly -
                 // a few times per second should be fine
-                System.Threading.Thread.Sleep(250);             
+                System.Threading.Thread.Sleep(250);
             }
         }
         /// <summary>
@@ -44,14 +44,14 @@ namespace Algorand
         /// <param name="txID">transaction ID</param>
         /// <param name="timeout">how many rounds do you wish to check pending transactions for</param>
         /// <returns>The pending transaction response</returns>
-        public static async Task<V2.Algod.Model.PendingTransactionResponse> WaitTransactionToComplete(V2.Algod.DefaultApi instance, string txID, ulong timeout = 3) 
+        public static async Task<V2.Algod.Model.PendingTransactionResponse> WaitTransactionToComplete(V2.Algod.DefaultApi instance, string txID, ulong timeout = 3)
         {
 
             if (instance == null || txID == null || txID.Length == 0 || timeout < 0)
             {
                 throw new ArgumentException("Bad arguments for waitForConfirmation.");
             }
-            V2.Algod.Model.NodeStatusResponse nodeStatusResponse = await instance.StatusAsync();            
+            V2.Algod.Model.NodeStatusResponse nodeStatusResponse = await instance.StatusAsync();
             var startRound = nodeStatusResponse.LastRound + 1;
             var currentRound = startRound;
             while (currentRound < (startRound + timeout))
@@ -84,7 +84,7 @@ namespace Algorand
         /// <returns></returns>
         public static TransactionID SubmitTransaction(AlgodApi instance, SignedTransaction signedTx) //throws Exception
         {
-            byte[] encodedTxBytes = Encoder.EncodeToMsgPack(signedTx);             
+            byte[] encodedTxBytes = Encoder.EncodeToMsgPack(signedTx);
             return instance.RawTransaction(encodedTxBytes);
         }
         /// <summary>
@@ -100,7 +100,7 @@ namespace Algorand
             {
                 return await instance.TransactionsAsync(ms);
             }
-        }        
+        }
         /// <summary>
         /// encode and submit signed transactions using algod v2 api
         /// </summary>
@@ -143,7 +143,7 @@ namespace Algorand
             return GetPaymentTransactionWithInfo(from, to, amount, message, trans.Fee, trans.LastRound, trans.GenesisID, trans.Genesishashb64);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>
@@ -154,7 +154,7 @@ namespace Algorand
         /// <param name="genesisId"></param>
         /// <param name="genesishashb64"></param>
         /// <returns></returns>
-        public static Transaction GetPaymentTransactionWithInfo(Address from, Address to, ulong? amount, string message, 
+        public static Transaction GetPaymentTransactionWithInfo(Address from, Address to, ulong? amount, string message,
             ulong? fee, ulong? lastRound, string genesisId, string genesishashb64)
         {
             var tx = GetPaymentTransactionWithFlatFee(from, to, amount, message, fee, lastRound, genesisId, genesishashb64);
@@ -162,7 +162,7 @@ namespace Algorand
             return tx;
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>
@@ -191,7 +191,7 @@ namespace Algorand
         /// <param name="message">message</param>
         /// <param name="trans">Transaction Params(use AlgodApi.TransactionParams() function to get the params)</param>
         /// <returns>payment transaction</returns>
-        public static Transaction GetPaymentTransaction(Address from, Address to, ulong? amount, string message, 
+        public static Transaction GetPaymentTransaction(Address from, Address to, ulong? amount, string message,
             TransactionParametersResponse trans)
         {
             if (trans is null)
@@ -217,9 +217,9 @@ namespace Algorand
         /// <param name="asset">The asset infomation</param>
         /// <param name="trans">The blockchain infomation</param>
         /// <param name="message">The message for the transaction(have no affect to the assect)</param>
-        /// <param name="decimals">A value of 0 represents an asset that is not divisible, 
-        /// while a value of 1 represents an asset that is divisible into tenths and so on, i.e, 
-        /// the number of digits to display after the decimal place when displaying the asset. 
+        /// <param name="decimals">A value of 0 represents an asset that is not divisible,
+        /// while a value of 1 represents an asset that is divisible into tenths and so on, i.e,
+        /// the number of digits to display after the decimal place when displaying the asset.
         /// This value must be between 0 and 19</param>
         /// <returns>transaction</returns>
         public static Transaction GetCreateAssetTransaction(AssetParams asset, TransactionParams trans, string message = "", int decimals = 0, ulong? flatFee = null)
@@ -261,7 +261,7 @@ namespace Algorand
             }
 
             return tx;
-        }        
+        }
 
         /// <summary>
         /// Generate a create asset transaction V2
@@ -269,9 +269,9 @@ namespace Algorand
         /// <param name="asset">The asset infomation</param>
         /// <param name="trans">The blockchain infomation</param>
         /// <param name="message">The message for the transaction(have no affect to the assect)</param>
-        /// <param name="decimals">A value of 0 represents an asset that is not divisible, 
-        /// while a value of 1 represents an asset that is divisible into tenths and so on, i.e, 
-        /// the number of digits to display after the decimal place when displaying the asset. 
+        /// <param name="decimals">A value of 0 represents an asset that is not divisible,
+        /// while a value of 1 represents an asset that is divisible into tenths and so on, i.e,
+        /// the number of digits to display after the decimal place when displaying the asset.
         /// This value must be between 0 and 19</param>
         /// <returns>transaction</returns>
         public static Transaction GetCreateAssetTransaction(V2.Algod.Model.AssetParams asset, V2.Algod.Model.TransactionParametersResponse trans, string message = "", ulong? flatFee = null)
@@ -281,10 +281,10 @@ namespace Algorand
             var tx = Transaction.CreateAssetCreateTransaction(new Address(asset.Creator), (ulong?)trans.Fee, (ulong?)trans.LastRound, (ulong?)trans.LastRound + 1000,
                 Encoding.UTF8.GetBytes(message), trans.GenesisId, new Digest(trans.GenesisHash),
                 asset.Total, (int)asset.Decimals, (bool)asset.DefaultFrozen, asset.UnitName, asset.Name, asset.Url,
-                asset.MetadataHash, 
-                asset.Manager==""||asset.Manager==null ? null : new Address(asset.Manager), 
+                asset.MetadataHash,
+                asset.Manager==""||asset.Manager==null ? null : new Address(asset.Manager),
                 asset.Reserve==""||asset.Reserve==null ? null : new Address(asset.Reserve),
-                asset.Freeze==""||asset.Freeze==null ? null : new Address(asset.Freeze), 
+                asset.Freeze==""||asset.Freeze==null ? null : new Address(asset.Freeze),
                 asset.Clawback==""||asset.Clawback==null ? null : new Address(asset.Clawback));
 
             if (flatFee is null || flatFee == 0)
@@ -294,7 +294,7 @@ namespace Algorand
             else
             {
                 tx.fee = flatFee;
-            }            
+            }
             return tx;
         }
         /// <summary>
@@ -312,7 +312,7 @@ namespace Algorand
             //sender must be manager
             var tx = Transaction.CreateAssetConfigureTransaction(sender, 1,
                 trans.LastRound, trans.LastRound + 1000, Encoding.UTF8.GetBytes(message), trans.GenesisID,
-                new Digest(trans.Genesishashb64), assetId, new Address(asset.Managerkey), 
+                new Digest(trans.Genesishashb64), assetId, new Address(asset.Managerkey),
                 new Address(asset.Reserveaddr), new Address(asset.Freezeaddr), new Address(asset.Clawbackaddr), false);
             if (flatFee is null || flatFee == 0)
             {
@@ -325,7 +325,7 @@ namespace Algorand
             return tx;
         }
 
-        public static Transaction GetConfigAssetTransaction(Address sender, V2.Algod.Model.Asset asset, TransactionParametersResponse trans, 
+        public static Transaction GetConfigAssetTransaction(Address sender, V2.Algod.Model.Asset asset, TransactionParametersResponse trans,
             string message = "", ulong? flatFee = null)
         {
             ValidateAsset(asset.Params);
@@ -357,9 +357,9 @@ namespace Algorand
         /// <param name="trans">The blockchain infomation</param>
         /// <param name="message">The message for the transaction(have no affect to the assect)</param>
         /// <returns>transaction</returns>
-        public static Transaction GetActivateAssetTransaction(Address sender, ulong? assetId, TransactionParams trans, 
+        public static Transaction GetActivateAssetTransaction(Address sender, ulong? assetId, TransactionParams trans,
             string message = "", ulong? flatFee = null)
-        {            
+        {
             return GetAssetOptingInTransaction(sender, assetId, trans, message, flatFee);
         }
         /// <summary>
@@ -371,7 +371,7 @@ namespace Algorand
         /// <param name="trans">The blockchain infomation</param>
         /// <param name="message">The message for the transaction(have no affect to the assect)</param>
         /// <returns>transaction</returns>
-        public static Transaction GetAssetOptingInTransaction(Address sender, ulong? assetId, TransactionParams trans, 
+        public static Transaction GetAssetOptingInTransaction(Address sender, ulong? assetId, TransactionParams trans,
             string message = "", ulong? flatFee = null)
         {
             var tx = Transaction.CreateAssetAcceptTransaction(sender, 1, trans.LastRound,
@@ -388,7 +388,7 @@ namespace Algorand
             //Account.SetFeeByFeePerByte(tx, trans.Fee);
             return tx;
         }
-        public static Transaction GetAssetOptingInTransaction(Address sender, ulong? assetID, TransactionParametersResponse trans, 
+        public static Transaction GetAssetOptingInTransaction(Address sender, ulong? assetID, TransactionParametersResponse trans,
             string message = "", ulong? flatFee = null)
         {
             var tx = Transaction.CreateAssetAcceptTransaction(sender, 1, (ulong?)trans.LastRound,
@@ -406,10 +406,10 @@ namespace Algorand
             return tx;
         }
 
-        public static Transaction GetTransferAssetTransaction(Address from, Address to, ulong? assetId, ulong amount, TransactionParams trans, 
+        public static Transaction GetTransferAssetTransaction(Address from, Address to, ulong? assetId, ulong amount, TransactionParams trans,
             Address closeTo = null, string message = "", ulong? flatFee = null) {
             var tx = Transaction.CreateAssetTransferTransaction(from, to, closeTo, amount, 1,
-                trans.LastRound, trans.LastRound + 1000, Encoding.UTF8.GetBytes(message), trans.GenesisID, 
+                trans.LastRound, trans.LastRound + 1000, Encoding.UTF8.GetBytes(message), trans.GenesisID,
                 new Digest(trans.Genesishashb64), assetId);
             if (flatFee is null || flatFee == 0)
             {
@@ -422,7 +422,7 @@ namespace Algorand
             //Account.SetFeeByFeePerByte(tx, trans.Fee);
             return tx;
         }
-        public static Transaction GetTransferAssetTransaction(Address from, Address to, ulong? assetId, ulong amount, 
+        public static Transaction GetTransferAssetTransaction(Address from, Address to, ulong? assetId, ulong amount,
             TransactionParametersResponse trans, Address closeTo = null, string message = "", ulong? flatFee = null)
         {
             var tx = Transaction.CreateAssetTransferTransaction(from, to, closeTo, amount, 1,
@@ -450,7 +450,7 @@ namespace Algorand
         /// <param name="trans">The blockchain infomation</param>
         /// <param name="message">The message for the transaction(have no affect to the assect)</param>
         /// <returns>transaction</returns>
-        public static Transaction GetFreezeAssetTransaction(Address sender, Address toFreeze, ulong? assetId, bool freezeState, 
+        public static Transaction GetFreezeAssetTransaction(Address sender, Address toFreeze, ulong? assetId, bool freezeState,
             TransactionParams trans, string message = "", ulong? flatFee = null)
         {
             var tx = Transaction.CreateAssetFreezeTransaction(sender, toFreeze, freezeState, 1, trans.LastRound,
@@ -467,7 +467,7 @@ namespace Algorand
             return tx;
         }
 
-        public static Transaction GetFreezeAssetTransaction(Address sender, Address toFreeze, ulong? assetId, bool freezeState, 
+        public static Transaction GetFreezeAssetTransaction(Address sender, Address toFreeze, ulong? assetId, bool freezeState,
             TransactionParametersResponse trans, string message = "", ulong? flatFee = null)
         {
             var tx = Transaction.CreateAssetFreezeTransaction(sender, toFreeze, freezeState, 1, (ulong?)trans.LastRound,
@@ -484,7 +484,7 @@ namespace Algorand
             return tx;
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reserve"></param>
         /// <param name="revokedFrom"></param>
@@ -494,11 +494,11 @@ namespace Algorand
         /// <param name="trans"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public static Transaction GetRevokeAssetTransaction(Address reserve, Address revokedFrom, Address receiver, ulong? assetId, 
+        public static Transaction GetRevokeAssetTransaction(Address reserve, Address revokedFrom, Address receiver, ulong? assetId,
             ulong amount, TransactionParams trans, string message = "", ulong? flatFee = null)
         {
             var tx = Transaction.CreateAssetRevokeTransaction(reserve, revokedFrom, receiver, amount, 1, trans.LastRound,
-                trans.LastRound + 1000, Encoding.UTF8.GetBytes(message), trans.GenesisID, 
+                trans.LastRound + 1000, Encoding.UTF8.GetBytes(message), trans.GenesisID,
                 new Digest(trans.Genesishashb64), assetId);
             if (flatFee is null || flatFee == 0)
             {
@@ -512,7 +512,7 @@ namespace Algorand
             return tx;
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reserve"></param>
         /// <param name="revokedFrom"></param>
@@ -523,7 +523,7 @@ namespace Algorand
         /// <param name="message"></param>
         /// <param name="flatFee"></param>
         /// <returns></returns>
-        public static Transaction GetRevokeAssetTransaction(Address reserve, Address revokedFrom, Address receiver, ulong? assetId, 
+        public static Transaction GetRevokeAssetTransaction(Address reserve, Address revokedFrom, Address receiver, ulong? assetId,
             ulong amount, TransactionParametersResponse trans, string message = "", ulong? flatFee = null)
         {
             var tx = Transaction.CreateAssetRevokeTransaction(reserve, revokedFrom, receiver, amount, 1, (ulong?)trans.LastRound,
@@ -542,17 +542,17 @@ namespace Algorand
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="manager"></param>
         /// <param name="assetId"></param>
         /// <param name="trans"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public static Transaction GetDestroyAssetTransaction(Address manager, ulong? assetId, TransactionParams trans, 
+        public static Transaction GetDestroyAssetTransaction(Address manager, ulong? assetId, TransactionParams trans,
             string message = "", ulong? flatFee = null)
         {
-            var tx = Transaction.CreateAssetDestroyTransaction(manager, 1, trans.LastRound, trans.LastRound + 1000, 
+            var tx = Transaction.CreateAssetDestroyTransaction(manager, 1, trans.LastRound, trans.LastRound + 1000,
                 Encoding.UTF8.GetBytes(message), new Digest(trans.Genesishashb64), assetId);
             if (flatFee is null || flatFee == 0)
             {
@@ -565,7 +565,7 @@ namespace Algorand
             //Account.SetFeeByFeePerByte(tx, trans.Fee);
             return tx;
         }
-        public static Transaction GetDestroyAssetTransaction(Address manager, ulong? assetId, TransactionParametersResponse trans, 
+        public static Transaction GetDestroyAssetTransaction(Address manager, ulong? assetId, TransactionParametersResponse trans,
             string message = "", ulong? flatFee = null)
         {
             var tx = Transaction.CreateAssetDestroyTransaction(manager, 1, (ulong?)trans.LastRound, (ulong?)trans.LastRound + 1000,
@@ -585,26 +585,26 @@ namespace Algorand
         {
             if (asset.Creator is null || asset.Creator == "") throw new ArgumentException("The sender must be specified.");
             else if (!Address.IsValid(asset.Creator)) throw new ArgumentException("The sender address is not valid.");
-            
+
             if (asset.Assetname is null || asset.Assetname == "") throw new ArgumentException("The asset name must be specified.");
-            
+
             if (asset.Unitname is null || asset.Unitname == "") throw new ArgumentException("The unit name must be specified.");
             else if (asset.Unitname.Length > 8) throw new ArgumentException(string.Format("The length of unit name is {0} > 8.", asset.Unitname.Length));
-            
+
             if (asset.Total is null || asset.Total < 1) throw new ArgumentException("The total number of the asset must be specified and bigger than zero.");
-            
+
             if (asset.Managerkey is null) asset.Managerkey = asset.Creator;
             else if (asset.Managerkey != "" && !Address.IsValid(asset.Managerkey)) throw new ArgumentException("The manager address is not valid.");
-            
+
             if (asset.Reserveaddr is null) asset.Reserveaddr = asset.Managerkey;
             else if (asset.Reserveaddr != "" && !Address.IsValid(asset.Reserveaddr)) throw new ArgumentException("The reserve address is not valid.");
-            
+
             if (asset.Freezeaddr is null) asset.Freezeaddr = asset.Managerkey;
             else if (asset.Freezeaddr != "" && !Address.IsValid(asset.Freezeaddr)) throw new ArgumentException("The freeze address is not valid.");
-            
+
             if (asset.Clawbackaddr is null) asset.Clawbackaddr = asset.Managerkey;
             else if (asset.Clawbackaddr != "" && !Address.IsValid(asset.Clawbackaddr)) throw new ArgumentException("The clawback address is not valid.");
-            
+
             if (asset.Metadatahash is null || asset.Metadatahash == "")
                 asset.Metadatahash = GetRandomAssetMetaHash();//auto generate metahash by sdk
             else if (Convert.FromBase64String(asset.Metadatahash).Length != 32)
@@ -615,26 +615,26 @@ namespace Algorand
         {
             if (asset.Creator is null || asset.Creator == "") throw new ArgumentException("The sender must be specified.");
             else if (!Address.IsValid(asset.Creator)) throw new ArgumentException("The sender address is not valid.");
-            
+
             if (asset.Name is null || asset.Name == "") throw new ArgumentException("The asset name must be specified.");
-            
+
             if (asset.UnitName is null || asset.UnitName == "") throw new ArgumentException("The unit name must be specified.");
             else if (asset.UnitName.Length > 8) throw new ArgumentException(string.Format("The length of unit name is {0} > 8.", asset.UnitName.Length));
-            
+
             if (asset.Total is null || asset.Total < 1) throw new ArgumentException("The total number of the asset must be specified and bigger than zero.");
-            
+
             if (asset.Manager is null) asset.Manager = asset.Creator;
             else if (asset.Manager != "" && !Address.IsValid(asset.Manager)) throw new ArgumentException("The manager address is not valid.");
-            
+
             if (asset.Reserve is null) asset.Reserve = asset.Manager;
             else if (asset.Reserve != "" && !Address.IsValid(asset.Reserve)) throw new ArgumentException("The reserve address is not valid.");
-            
+
             if (asset.Freeze is null) asset.Freeze = asset.Manager;
             else if (asset.Freeze != "" && !Address.IsValid(asset.Freeze)) throw new ArgumentException("The freeze address is not valid.");
-            
+
             if (asset.Clawback is null) asset.Clawback = asset.Manager;
             else if (asset.Clawback != "" && !Address.IsValid(asset.Clawback)) throw new ArgumentException("The clawback address is not valid.");
-            
+
             if (asset.MetadataHash is null || asset.MetadataHash.Length == 0)
                 asset.MetadataHash = Encoding.UTF8.GetBytes(GetRandomAssetMetaHash());//auto generate metahash by sdk
             else if (asset.MetadataHash.Length != 32)
@@ -643,7 +643,7 @@ namespace Algorand
             if (asset.DefaultFrozen is null) asset.DefaultFrozen = false;
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="bidder"></param>
         /// <param name="auction"></param>
@@ -669,7 +669,7 @@ namespace Algorand
             return tx;
         }
         ///// <summary>
-        ///// 
+        /////
         ///// </summary>
         ///// <param name="sender"></param>
         ///// <param name="firstValid"></param>
@@ -682,7 +682,7 @@ namespace Algorand
         ///// <param name="foreignApps"></param>
         ///// <param name="foreignAssets"></param>
         ///// <returns></returns>
-        //public static Transaction GetApplicationTransaction(Address sender, long firstValid, long lastValid, string genesishashb64, 
+        //public static Transaction GetApplicationTransaction(Address sender, long firstValid, long lastValid, string genesishashb64,
         //    OnCompletion onCompletion, long applicationId, List<byte[]> applicationArgs, List<Address> accounts, List<long> foreignApps, List<long> foreignAssets)
         //{
         //    var txn = new Transaction
@@ -701,7 +701,7 @@ namespace Algorand
 
         //    if (applicationId >= 0) txn.applicationId = (ulong?)applicationId;
         //    else throw new ArgumentException("Please set right application Id.");
-        //    //if (onCompletion != new OnCompletion()) 
+        //    //if (onCompletion != new OnCompletion())
         //        txn.onCompletion = onCompletion;
         //    //else throw new ArgumentException("OnCompletion is required, please file a bug report.");
         //    if (applicationArgs != null) txn.applicationArgs = applicationArgs;
@@ -799,7 +799,7 @@ namespace Algorand
         /// <param name="clearProgram">clear program</param>
         /// <param name="trans">suggested transaction params</param>
         /// <returns>update application transaction</returns>
-        public static Transaction GetApplicationUpdateTransaction(Address sender, ulong? applicationId, 
+        public static Transaction GetApplicationUpdateTransaction(Address sender, ulong? applicationId,
             TEALProgram approvalProgram, TEALProgram clearProgram, TransactionParametersResponse trans)
         {
             var fee = (ulong?)trans.Fee;
@@ -892,7 +892,7 @@ namespace Algorand
             return txn;
         }
         ///// <summary>
-        ///// 
+        /////
         ///// </summary>
         ///// <param name="lsig"></param>
         ///// <param name="receiver"></param>
@@ -909,10 +909,10 @@ namespace Algorand
         //    Account.SetFeeByFeePerByte(tx, trans.Fee);
         //    return tx;
         //}
-        //public static Transaction GetLogicSignatureTransaction(LogicsigSignature lsig, Address receiver, 
+        //public static Transaction GetLogicSignatureTransaction(LogicsigSignature lsig, Address receiver,
         //    TransactionParametersResponse trans, string message = "")
         //{
-        //    var tx = new Transaction(lsig.ToAddress(), receiver, 1, (ulong?)trans.LastRound, 
+        //    var tx = new Transaction(lsig.ToAddress(), receiver, 1, (ulong?)trans.LastRound,
         //        (ulong?)trans.LastRound + 1000, trans.GenesisId, new Digest(trans.GenesisHash))
         //    {
         //        note = Encoding.UTF8.GetBytes(message)
@@ -932,7 +932,7 @@ namespace Algorand
         //    return tx;
         //}
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="client"></param>
         /// <param name="stxn"></param>
@@ -942,7 +942,7 @@ namespace Algorand
         {
             List<V2.Algod.Model.DryrunSource> sources = new List<V2.Algod.Model.DryrunSource>();
             List<SignedTransaction> stxns = new List<SignedTransaction>();
-            //compiled 
+            //compiled
             if (source is null)
             {
                 stxns.Add(stxn);

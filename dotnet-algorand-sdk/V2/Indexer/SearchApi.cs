@@ -16,7 +16,7 @@ namespace Algorand.V2.Indexer
 {
     using System = global::System;
     using Algorand.V2.Indexer.Model;
-
+    using System.Numerics;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.14.5.0 (NJsonSchema v10.5.2.0 (Newtonsoft.Json v12.0.0.0))")]
     public partial interface ISearchApi
@@ -74,7 +74,7 @@ namespace Algorand.V2.Indexer
         /// <param name="asset_id">Asset ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, int? asset_id);
+        System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, BigInteger? asset_id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <param name="include_all">Include all items including closed accounts, deleted applications, destroyed assets, opted-out asset holdings, and closed-out application localstates.</param>
@@ -86,7 +86,7 @@ namespace Algorand.V2.Indexer
         /// <param name="asset_id">Asset ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, int? asset_id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, BigInteger? asset_id, System.Threading.CancellationToken cancellationToken);
 
         /// <param name="limit">Maximum number of results to return. There could be additional pages even if the limit is not reached.</param>
         /// <param name="next">The next page of results. Use the next token provided by the previous results.</param>
@@ -442,7 +442,7 @@ namespace Algorand.V2.Indexer
         /// <param name="asset_id">Asset ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, int? asset_id)
+        public System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, BigInteger? asset_id)
         {
             return AssetsAsync(include_all, limit, next, creator, name, unit, asset_id, System.Threading.CancellationToken.None);
         }
@@ -457,7 +457,7 @@ namespace Algorand.V2.Indexer
         /// <param name="asset_id">Asset ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, int? asset_id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, BigInteger? asset_id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v2/assets?");

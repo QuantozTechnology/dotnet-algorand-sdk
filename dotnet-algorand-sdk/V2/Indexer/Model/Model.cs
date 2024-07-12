@@ -342,7 +342,7 @@ namespace Algorand.V2.Indexer.Model
     {
         /// <summary>unique asset identifier</summary>
         [Newtonsoft.Json.JsonProperty("index")] //, Required = Newtonsoft.Json.Required.Always)]
-        public int Index { get; set; }
+        public BigInteger Index { get; set; }
 
         /// <summary>Whether or not this asset is currently deleted.</summary>
         [Newtonsoft.Json.JsonProperty("deleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

@@ -4,8 +4,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Linq;
 using System.Collections.Generic;
-using System.Threading;
-using Algorand.V2.Algod.Model;
+using System.Numerics;
 
 namespace Algorand
 {
@@ -313,7 +312,7 @@ namespace Algorand
         /// <param name="freeze">account which can freeze or unfreeze holder accounts</param>
         /// <param name="clawback">account which can issue clawbacks against holder accounts</param>
         private Transaction(Address sender, ulong? fee, ulong? firstValid, ulong? lastValid, byte[] note,
-                           string genesisID, Digest genesisHash, ulong? assetTotal, int assetDecimals, bool defaultFrozen,
+                           string genesisID, Digest genesisHash, BigInteger? assetTotal, int assetDecimals, bool defaultFrozen,
                            string assetUnitName, string assetName, string url, byte[] metadataHash,
                            Address manager, Address reserve, Address freeze, Address clawback)
         {
@@ -580,7 +579,7 @@ namespace Algorand
         /// <param name="clawback">account which can issue clawbacks against holder accounts</param>
         /// <returns></returns>
         public static Transaction CreateAssetCreateTransaction(Address sender, ulong? fee, ulong? firstValid, ulong? lastValid, byte[] note,
-                           string genesisID, Digest genesisHash, ulong? assetTotal, int assetDecimals, bool defaultFrozen,
+                           string genesisID, Digest genesisHash, BigInteger? assetTotal, int assetDecimals, bool defaultFrozen,
                            string assetUnitName, string assetName, string url, byte[] metadataHash,
                            Address manager, Address reserve, Address freeze, Address clawback)
         {
@@ -799,7 +798,7 @@ namespace Algorand
                     genesisHash)
             {
                 assetReceiver = assetReceiver, //arcv
-                assetSender = assetRevokedFrom, //asnd        
+                assetSender = assetRevokedFrom, //asnd
                 assetAmount = assetAmount, // aamt
                 sender = transactionSender // snd
             }; // gh
@@ -919,10 +918,11 @@ namespace Algorand
             public static readonly Type AssetTransfer = new Type(4);
             public static readonly Type AssetFreeze = new Type(5);
             public static readonly Type ApplicationCall = new Type(6);
+            public static readonly Type StateProof = new Type(7);
 
             private static Dictionary<string, int> namesMap = new Dictionary<string, int> {
                 {"", 0 }, {"pay", 1}, {"keyreg", 2},
-                { "acfg", 3}, {"axfer", 4}, { "afrz", 5}, { "appl", 6}
+                { "acfg", 3}, {"axfer", 4}, { "afrz", 5}, { "appl", 6}, { "sptf", 7}
             };
             /// <summary>
             /// Return the enumeration for the given string value. Required for JSON serialization.
@@ -1060,7 +1060,7 @@ namespace Algorand
             /// </summary>
             [JsonProperty(PropertyName = "t")]
             [DefaultValue(0)]
-            public ulong? assetTotal = 0;
+            public BigInteger? assetTotal = 0;
 
             /// <summary>
             /// Decimals specifies the number of digits to display after the decimal
@@ -1132,7 +1132,7 @@ namespace Algorand
             public Address assetClawback = new Address();
 
             public AssetParams(
-                   ulong? assetTotal,
+                   BigInteger? assetTotal,
                    int assetDecimals,
                    bool defaultFrozen,
                    string assetUnitName,

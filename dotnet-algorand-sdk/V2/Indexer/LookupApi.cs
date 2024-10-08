@@ -16,7 +16,7 @@ namespace Algorand.V2.Indexer
 {
     using System = global::System;
     using Algorand.V2.Indexer.Model;
-
+    using System.Numerics;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.14.5.0 (NJsonSchema v10.5.2.0 (Newtonsoft.Json v12.0.0.0))")]
     public partial interface ILookupApi
@@ -116,13 +116,13 @@ namespace Algorand.V2.Indexer
         /// <param name="include_all">Include all items including closed accounts, deleted applications, destroyed assets, opted-out asset holdings, and closed-out application localstates.</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response9> AssetsAsync(int asset_id, bool? include_all);
+        System.Threading.Tasks.Task<Response9> AssetsAsync(ulong asset_id, bool? include_all);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <param name="include_all">Include all items including closed accounts, deleted applications, destroyed assets, opted-out asset holdings, and closed-out application localstates.</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response9> AssetsAsync(int asset_id, bool? include_all, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<Response9> AssetsAsync(ulong asset_id, bool? include_all, System.Threading.CancellationToken cancellationToken);
 
         /// <param name="include_all">Include all items including closed accounts, deleted applications, destroyed assets, opted-out asset holdings, and closed-out application localstates.</param>
         /// <param name="limit">Maximum number of results to return. There could be additional pages even if the limit is not reached.</param>
@@ -419,9 +419,6 @@ namespace Algorand.V2.Indexer
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public async System.Threading.Tasks.Task<Response4> TransactionsGetAsync(int? limit, string next, string note_prefix, TxType? tx_type, SigType? sig_type, string txid, ulong? round, ulong? min_round, ulong? max_round, int? asset_id, System.DateTimeOffset? before_time, System.DateTimeOffset? after_time, ulong? currency_greater_than, ulong? currency_less_than, string account_id, bool? rekey_to, System.Threading.CancellationToken cancellationToken)
         {
-            if (account_id == null)
-                throw new System.ArgumentNullException("account_id");
-
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v2/accounts/{account-id}/transactions?");
             urlBuilder_.Replace("{account-id}", System.Uri.EscapeDataString(ConvertToString(account_id, System.Globalization.CultureInfo.InvariantCulture)));
@@ -789,7 +786,7 @@ namespace Algorand.V2.Indexer
         /// <param name="include_all">Include all items including closed accounts, deleted applications, destroyed assets, opted-out asset holdings, and closed-out application localstates.</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Response9> AssetsAsync(int asset_id, bool? include_all)
+        public System.Threading.Tasks.Task<Response9> AssetsAsync(ulong asset_id, bool? include_all)
         {
             return AssetsAsync(asset_id, include_all, System.Threading.CancellationToken.None);
         }
@@ -798,7 +795,7 @@ namespace Algorand.V2.Indexer
         /// <param name="include_all">Include all items including closed accounts, deleted applications, destroyed assets, opted-out asset holdings, and closed-out application localstates.</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Response9> AssetsAsync(int asset_id, bool? include_all, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Response9> AssetsAsync(ulong asset_id, bool? include_all, System.Threading.CancellationToken cancellationToken)
         {
             if (asset_id == null)
                 throw new System.ArgumentNullException("asset_id");

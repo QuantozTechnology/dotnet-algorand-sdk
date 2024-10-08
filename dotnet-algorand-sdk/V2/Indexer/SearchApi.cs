@@ -16,7 +16,7 @@ namespace Algorand.V2.Indexer
 {
     using System = global::System;
     using Algorand.V2.Indexer.Model;
-
+    using System.Numerics;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.14.5.0 (NJsonSchema v10.5.2.0 (Newtonsoft.Json v12.0.0.0))")]
     public partial interface ISearchApi
@@ -32,7 +32,7 @@ namespace Algorand.V2.Indexer
         /// <param name="application_id">Application ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response> AccountsAsync(int? asset_id, int? limit, string next, ulong? currency_greater_than, bool? include_all, ulong? currency_less_than, string auth_addr, ulong? round, int? application_id);
+        System.Threading.Tasks.Task<Response> AccountsAsync(ulong? asset_id, int? limit, string next, ulong? currency_greater_than, bool? include_all, ulong? currency_less_than, string auth_addr, ulong? round, int? application_id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <param name="asset_id">Asset ID</param>
@@ -46,7 +46,7 @@ namespace Algorand.V2.Indexer
         /// <param name="application_id">Application ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response> AccountsAsync(int? asset_id, int? limit, string next, ulong? currency_greater_than, bool? include_all, ulong? currency_less_than, string auth_addr, ulong? round, int? application_id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<Response> AccountsAsync(ulong? asset_id, int? limit, string next, ulong? currency_greater_than, bool? include_all, ulong? currency_less_than, string auth_addr, ulong? round, int? application_id, System.Threading.CancellationToken cancellationToken);
 
         /// <param name="application_id">Application ID</param>
         /// <param name="include_all">Include all items including closed accounts, deleted applications, destroyed assets, opted-out asset holdings, and closed-out application localstates.</param>
@@ -74,7 +74,7 @@ namespace Algorand.V2.Indexer
         /// <param name="asset_id">Asset ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, int? asset_id);
+        System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, BigInteger? asset_id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <param name="include_all">Include all items including closed accounts, deleted applications, destroyed assets, opted-out asset holdings, and closed-out application localstates.</param>
@@ -86,7 +86,7 @@ namespace Algorand.V2.Indexer
         /// <param name="asset_id">Asset ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, int? asset_id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, BigInteger? asset_id, System.Threading.CancellationToken cancellationToken);
 
         /// <param name="limit">Maximum number of results to return. There could be additional pages even if the limit is not reached.</param>
         /// <param name="next">The next page of results. Use the next token provided by the previous results.</param>
@@ -111,7 +111,7 @@ namespace Algorand.V2.Indexer
         /// <param name="application_id">Application ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response4> TransactionsAsync(int? limit, string next, string note_prefix, TxType? tx_type, SigType? sig_type, string txid, ulong? round, ulong? min_round, ulong? max_round, int? asset_id, System.DateTimeOffset? before_time, System.DateTimeOffset? after_time, ulong? currency_greater_than, ulong? currency_less_than, string address, AddressRole? address_role, bool? exclude_close_to, bool? rekey_to, int? application_id);
+        System.Threading.Tasks.Task<Response4> TransactionsAsync(int? limit, string next, string note_prefix, TxType? tx_type, SigType? sig_type, string txid, ulong? round, ulong? min_round, ulong? max_round, ulong? asset_id, System.DateTimeOffset? before_time, System.DateTimeOffset? after_time, ulong? currency_greater_than, ulong? currency_less_than, string address, AddressRole? address_role, bool? exclude_close_to, bool? rekey_to, int? application_id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <param name="limit">Maximum number of results to return. There could be additional pages even if the limit is not reached.</param>
@@ -137,7 +137,7 @@ namespace Algorand.V2.Indexer
         /// <param name="application_id">Application ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response4> TransactionsAsync(int? limit, string next, string note_prefix, TxType? tx_type, SigType? sig_type, string txid, ulong? round, ulong? min_round, ulong? max_round, int? asset_id, System.DateTimeOffset? before_time, System.DateTimeOffset? after_time, ulong? currency_greater_than, ulong? currency_less_than, string address, AddressRole? address_role, bool? exclude_close_to, bool? rekey_to, int? application_id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<Response4> TransactionsAsync(int? limit, string next, string note_prefix, TxType? tx_type, SigType? sig_type, string txid, ulong? round, ulong? min_round, ulong? max_round, ulong? asset_id, System.DateTimeOffset? before_time, System.DateTimeOffset? after_time, ulong? currency_greater_than, ulong? currency_less_than, string address, AddressRole? address_role, bool? exclude_close_to, bool? rekey_to, int? application_id, System.Threading.CancellationToken cancellationToken);
 
     }
 
@@ -186,7 +186,7 @@ namespace Algorand.V2.Indexer
         /// <param name="application_id">Application ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Response> AccountsAsync(int? asset_id, int? limit, string next, ulong? currency_greater_than, bool? include_all, ulong? currency_less_than, string auth_addr, ulong? round, int? application_id)
+        public System.Threading.Tasks.Task<Response> AccountsAsync(ulong? asset_id, int? limit, string next, ulong? currency_greater_than, bool? include_all, ulong? currency_less_than, string auth_addr, ulong? round, int? application_id)
         {
             return AccountsAsync(asset_id, limit, next, currency_greater_than, include_all, currency_less_than, auth_addr, round, application_id, System.Threading.CancellationToken.None);
         }
@@ -203,7 +203,7 @@ namespace Algorand.V2.Indexer
         /// <param name="application_id">Application ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Response> AccountsAsync(int? asset_id, int? limit, string next, ulong? currency_greater_than, bool? include_all, ulong? currency_less_than, string auth_addr, ulong? round, int? application_id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Response> AccountsAsync(ulong? asset_id, int? limit, string next, ulong? currency_greater_than, bool? include_all, ulong? currency_less_than, string auth_addr, ulong? round, int? application_id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v2/accounts?");
@@ -442,7 +442,7 @@ namespace Algorand.V2.Indexer
         /// <param name="asset_id">Asset ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, int? asset_id)
+        public System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, BigInteger? asset_id)
         {
             return AssetsAsync(include_all, limit, next, creator, name, unit, asset_id, System.Threading.CancellationToken.None);
         }
@@ -457,7 +457,7 @@ namespace Algorand.V2.Indexer
         /// <param name="asset_id">Asset ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, int? asset_id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Response3> AssetsAsync(bool? include_all, int? limit, string next, string creator, string name, string unit, BigInteger? asset_id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v2/assets?");
@@ -593,7 +593,7 @@ namespace Algorand.V2.Indexer
         /// <param name="application_id">Application ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Response4> TransactionsAsync(int? limit, string next, string note_prefix, TxType? tx_type, SigType? sig_type, string txid, ulong? round, ulong? min_round, ulong? max_round, int? asset_id, System.DateTimeOffset? before_time, System.DateTimeOffset? after_time, ulong? currency_greater_than, ulong? currency_less_than, string address, AddressRole? address_role, bool? exclude_close_to, bool? rekey_to, int? application_id)
+        public System.Threading.Tasks.Task<Response4> TransactionsAsync(int? limit, string next, string note_prefix, TxType? tx_type, SigType? sig_type, string txid, ulong? round, ulong? min_round, ulong? max_round, ulong? asset_id, System.DateTimeOffset? before_time, System.DateTimeOffset? after_time, ulong? currency_greater_than, ulong? currency_less_than, string address, AddressRole? address_role, bool? exclude_close_to, bool? rekey_to, int? application_id)
         {
             return TransactionsAsync(limit, next, note_prefix, tx_type, sig_type, txid, round, min_round, max_round, asset_id, before_time, after_time, currency_greater_than, currency_less_than, address, address_role, exclude_close_to, rekey_to, application_id, System.Threading.CancellationToken.None);
         }
@@ -622,7 +622,7 @@ namespace Algorand.V2.Indexer
         /// <param name="application_id">Application ID</param>
         /// <returns>(empty)</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Response4> TransactionsAsync(int? limit, string next, string note_prefix, TxType? tx_type, SigType? sig_type, string txid, ulong? round, ulong? min_round, ulong? max_round, int? asset_id, System.DateTimeOffset? before_time, System.DateTimeOffset? after_time, ulong? currency_greater_than, ulong? currency_less_than, string address, AddressRole? address_role, bool? exclude_close_to, bool? rekey_to, int? application_id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Response4> TransactionsAsync(int? limit, string next, string note_prefix, TxType? tx_type, SigType? sig_type, string txid, ulong? round, ulong? min_round, ulong? max_round, ulong? asset_id, System.DateTimeOffset? before_time, System.DateTimeOffset? after_time, ulong? currency_greater_than, ulong? currency_less_than, string address, AddressRole? address_role, bool? exclude_close_to, bool? rekey_to, int? application_id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v2/transactions?");

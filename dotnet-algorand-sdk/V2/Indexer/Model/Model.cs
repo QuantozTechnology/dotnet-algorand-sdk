@@ -342,7 +342,7 @@ namespace Algorand.V2.Indexer.Model
     {
         /// <summary>unique asset identifier</summary>
         [Newtonsoft.Json.JsonProperty("index")] //, Required = Newtonsoft.Json.Required.Always)]
-        public BigInteger Index { get; set; }
+        public ulong Index { get; set; }
 
         /// <summary>Whether or not this asset is currently deleted.</summary>
         [Newtonsoft.Json.JsonProperty("deleted", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1132,7 +1132,7 @@ namespace Algorand.V2.Indexer.Model
 
         /// <summary>\[xaid\] ID of the asset being transferred.</summary>
         [Newtonsoft.Json.JsonProperty("asset-id")] //, Required = Newtonsoft.Json.Required.Always)]
-        public BigInteger AssetId { get; set; }
+        public ulong AssetId { get; set; }
 
         /// <summary>Number of assets transfered to the close-to account as part of the transaction.</summary>
         [Newtonsoft.Json.JsonProperty("close-amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

@@ -6,7 +6,7 @@
     <AssemblyName>Algorand</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>0.2.2.0-beta18</Version>
+    <Version>0.2.2.0-beta19</Version>
     <Authors>Riley Ge</Authors>
     <Company>Tson Tec</Company>
     <Product>Algorand .NET SDK </Product>

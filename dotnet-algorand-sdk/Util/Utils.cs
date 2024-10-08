@@ -635,9 +635,7 @@ namespace Algorand
             if (asset.Clawback is null) asset.Clawback = asset.Manager;
             else if (asset.Clawback != "" && !Address.IsValid(asset.Clawback)) throw new ArgumentException("The clawback address is not valid.");
 
-            if (asset.MetadataHash is null || asset.MetadataHash.Length == 0)
-                asset.MetadataHash = Encoding.UTF8.GetBytes(GetRandomAssetMetaHash());//auto generate metahash by sdk
-            else if (asset.MetadataHash.Length != 32)
+            if (asset.MetadataHash is not null && asset.MetadataHash.Length != 32)
                 throw new ArgumentException("The metadata hash should be 32 bytes.");
 
             if (asset.DefaultFrozen is null) asset.DefaultFrozen = false;

@@ -1132,7 +1132,7 @@ namespace Algorand.V2.Indexer.Model
 
         /// <summary>\[xaid\] ID of the asset being transferred.</summary>
         [Newtonsoft.Json.JsonProperty("asset-id")] //, Required = Newtonsoft.Json.Required.Always)]
-        public BigInteger AssetId { get; set; }
+        public ulong AssetId { get; set; }
 
         /// <summary>Number of assets transfered to the close-to account as part of the transaction.</summary>
         [Newtonsoft.Json.JsonProperty("close-amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

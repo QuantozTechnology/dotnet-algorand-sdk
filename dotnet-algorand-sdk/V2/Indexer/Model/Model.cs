@@ -15,6 +15,7 @@
 namespace Algorand.V2.Indexer.Model
 {
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
     using Newtonsoft.Json.Serialization;
     using System;
     using System.Collections.Generic;
@@ -1316,7 +1317,10 @@ namespace Algorand.V2.Indexer.Model
         Appl = 5,
         
         [System.Runtime.Serialization.EnumMember(Value = @"stpf")]
-        Stpf = 6
+        Stpf = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hb")]
+        Hb = 7
     }
 
     /// <summary>SigType filters just results using the specified type of signature:
@@ -1625,7 +1629,10 @@ namespace Algorand.V2.Indexer.Model
         Appl = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"stpf")]
-        Stpf = 6
+        Stpf = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hb")]
+        Hb = 7
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.14.5.0 (NJsonSchema v10.5.2.0 (Newtonsoft.Json v12.0.0.0))")]

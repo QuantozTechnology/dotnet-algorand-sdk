@@ -149,7 +149,7 @@ namespace Algorand.V2.Algod.Model
     {
         /// <summary>unique asset identifier</summary>
         [Newtonsoft.Json.JsonProperty("index", Required = Newtonsoft.Json.Required.Always)]
-        public BigInteger Index { get; set; }
+        public ulong Index { get; set; }
 
         [Newtonsoft.Json.JsonProperty("params", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -171,7 +171,7 @@ namespace Algorand.V2.Algod.Model
 
         /// <summary>Asset ID of the holding.</summary>
         [Newtonsoft.Json.JsonProperty("asset-id", Required = Newtonsoft.Json.Required.Always)]
-        public BigInteger AssetId { get; set; }
+        public ulong AssetId { get; set; }
 
         /// <summary>\[f\] whether or not the holding is frozen.</summary>
         [Newtonsoft.Json.JsonProperty("is-frozen", Required = Newtonsoft.Json.Required.Always)]
@@ -233,7 +233,7 @@ namespace Algorand.V2.Algod.Model
 
         /// <summary>\[t\] The total number of units of this asset.</summary>
         [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.Always)]
-        public ulong? Total { get; set; }
+        public BigInteger? Total { get; set; }
 
         /// <summary>\[un\] Name of a unit of this asset, as supplied by the creator. Included only when the name of a unit of this asset is composed of printable utf-8 characters.</summary>
         [Newtonsoft.Json.JsonProperty("unit-name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
